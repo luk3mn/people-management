@@ -125,7 +125,7 @@ _Before starting this application in your local environment, it'll be necessary 
 
 - [ ] Create person
 - [ ] Update person 
-- [ ] Search all people
+- [x] Search all people
 - [ ] Search people by id
 - [ ] Create address
 - [ ] Update address

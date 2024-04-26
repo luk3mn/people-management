@@ -1,0 +1,18 @@
+spring:
+  application:
+    name: gerenciamento_pessoas
+  datasource:
+    url: jdbc:postgresql://localhost:5432/p_management
+    username: admin
+    password: admin
+  jpa:
+    properties:
+      hibernate:
+        dialect:
+          org:
+            hibernate:
+              dialect:
+                PostgreSQLDialect: org.hibernate.dialect.PostgreSQLDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
