@@ -1,6 +1,6 @@
 <!-- ![thumbnail-Formação Java (4)](https://user-images.githubusercontent.com/66698429/226751112-f79aaa28-16c9-4561-8a15-0ac62ec9cb44.png) -->
 
-<a name="luk3mn.github.io">
+<a name="people-management">
     <img src="https://raw.githubusercontent.com/luk3mn/luk3mn/main/soft_cover.png" width="1480">
 </a>
 
@@ -20,12 +20,12 @@
 <br />
 <div align="center">
 
-  <h3 align="center">Project Name Here</h3>
+  <h3 align="center">People Management</h3>
 
   <p align="center">
-    description here
+    People management API built in Java and Spring Boot
     <br />
-    <a href="https://github.com/luk3mn/luk3mn.github.io/README.md"><strong>Explore the docs »</strong></a>
+    <a href="https://github.com/luk3mn/people-management/README.md"><strong>Explore the docs »</strong></a>
     <br />
     <br />
   </p>
@@ -67,24 +67,18 @@
 <!-- IMAGE (OPCIONAL) -->
 
 <p align="justify">
-
+ 
 </p> 
 
-<p align="right">(<a href="#luk3mn.github.io">back to top</a>)</p>
+<p align="right">(<a href="#people-management">back to top</a>)</p>
 
 ### Built With
 
-Write here
-
-* [![Python][Python]][Python-url]
-* [![Flask][Flask]][Flask-url]
 * [![Java][Java]][Java-url]
 * [![Spring][Spring]][Spring-url]
 * [![PostgreSQL][PostgreSQL]][PostgreSQL-url]
-* [![Mongo][Mongo]][Mongo-url]
-* [![Javascript][Javascript]][Javascript-url]
 
-<p align="right">(<a href="#luk3mn.github.io">back to top</a>)</p>
+<p align="right">(<a href="#people-management">back to top</a>)</p>
 
 
 
@@ -95,7 +89,9 @@ Here are some important topics about this project and how to replay it.
 
 ### Prerequisites
 
-* 
+* [Java >> 17](https://docs.oracle.com/en/java/javase/17/docs/api/index.html)
+* [Docker](https://docs.docker.com/)
+* [Docker Compose](https://docs.docker.com/compose/)
 
 ### Installation
 
@@ -103,11 +99,11 @@ _Before starting this application in your local environment, it'll be necessary 
 
 1. Clone the repo
    ```sh
-   git clone https://github.com/luk3mn/luk3mn.github.io.git
+   git clone https://github.com/luk3mn/people-management.git
    ```
 
 
-<p align="right">(<a href="#luk3mn.github.io">back to top</a>)</p>
+<p align="right">(<a href="#people-management">back to top</a>)</p>
 
 
 
@@ -115,16 +111,30 @@ _Before starting this application in your local environment, it'll be necessary 
 <!-- ## Usage -->
 
 <!-- Deploy -->
-<!-- ## Deploy -->
 
+[//]: # (## Deploy)
+
+[//]: # ()
+[//]: # (```shell)
+
+[//]: # (   )
+[//]: # (```)
 
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ]
+- [ ] Create person
+- [ ] Update person 
+- [ ] Search all people
+- [ ] Search people by id
+- [ ] Create address
+- [ ] Update address
+- [ ] Search all address by id person
+- [ ] Search main address by id person
+- [ ] indicate the main person address
 
 
-<p align="right">(<a href="#luk3mn.github.io">back to top</a>)</p>
+<p align="right">(<a href="#people-management">back to top</a>)</p>
 
 
 
@@ -133,7 +143,7 @@ _Before starting this application in your local environment, it'll be necessary 
 
 Distributed under the MIT License. See `LICENSE.txt` for more information.
 
-<p align="right">(<a href="#luk3mn.github.io">back to top</a>)</p>
+<p align="right">(<a href="#people-management">back to top</a>)</p>
 
 
 
@@ -145,50 +155,43 @@ Distributed under the MIT License. See `LICENSE.txt` for more information.
 
 If you have any feedback, please reach out to us at lucasnunes2030@gmail.com
 
-> Project Link: [https://github.com/luk3mn/luk3mn.github.io](https://github.com/luk3mn/luk3mn.github.io)
+> Project Link: [https://github.com/luk3mn/people-management](https://github.com/luk3mn/people-management)
 
-<p align="right">(<a href="#luk3mn.github.io">back to top</a>)</p>
-
-
-<!-- ACKNOWLEDGMENTS -->
-## Acknowledgments
-
-* []()
+<p align="right">(<a href="#people-management">back to top</a>)</p>
 
 
-<p align="right">(<a href="#luk3mn.github.io">back to top</a>)</p>
+[//]: # (<!-- ACKNOWLEDGMENTS -->)
+
+[//]: # (## Acknowledgments)
+
+[//]: # (* []&#40;&#41;)
+
+
+<p align="right">(<a href="#people-management">back to top</a>)</p>
 
 
 
 <!-- MARKDOWN LINKS & IMAGES -->
 <!-- https://www.markdownguide.org/basic-syntax/#reference-style-links -->
-[contributors-shield]: https://img.shields.io/github/contributors/luk3mn/luk3mn.github.io.svg?style=for-the-badge
-[contributors-url]: https://github.com/luk3mn/luk3mn.github.io/graphs/contributors
-[issues-shield]: https://img.shields.io/github/issues/luk3mn/luk3mn.github.io.svg?style=for-the-badge
-[issues-url]: https://github.com/luk3mn/luk3mn.github.io/issues
-[forks-shield]: https://img.shields.io/github/forks/luk3mn/luk3mn.github.io.svg?style=for-the-badge
-[forks-url]: https://github.com/luk3mn/luk3mn.github.io/network/members
-[stars-shield]: https://img.shields.io/github/stars/luk3mn/luk3mn.github.io.svg?style=for-the-badge
-[stars-url]: https://github.com/luk3mn/luk3mn.github.io/stargazers
+[contributors-shield]: https://img.shields.io/github/contributors/luk3mn/people-management.svg?style=for-the-badge
+[contributors-url]: https://github.com/luk3mn/people-management/graphs/contributors
+[issues-shield]: https://img.shields.io/github/issues/luk3mn/people-management.svg?style=for-the-badge
+[issues-url]: https://github.com/luk3mn/people-management/issues
+[forks-shield]: https://img.shields.io/github/forks/luk3mn/people-management.svg?style=for-the-badge
+[forks-url]: https://github.com/luk3mn/people-management/network/members
+[stars-shield]: https://img.shields.io/github/stars/luk3mn/people-management.svg?style=for-the-badge
+[stars-url]: https://github.com/luk3mn/people-management/stargazers
 [license-shield]: https://img.shields.io/github/license/othneildrew/Best-README-Template.svg?style=for-the-badge
-[license-url]: https://github.com/luk3mn/luk3mn.github.io/blob/master/LICENSE
+[license-url]: https://github.com/luk3mn/people-management/blob/master/LICENSE
 [linkedin-shield]: https://img.shields.io/badge/-LinkedIn-black.svg?style=for-the-badge&logo=linkedin&colorB=555
 [linkedin-url]: https://www.linkedin.com/in/lucasmaues/
 [personal-shield]: https://img.shields.io/static/v1?label=Luke&message=🎸&color=2e3643&style=for-the-badge&colorB=555
 [personal-url]: https://www.rocketseat.com.br/
 
 <!-- Stack Shields -->
-[Python]: https://img.shields.io/badge/Python-3776AB?style=for-the-badge&logo=python&logoColor=ffffff
-[Python-url]: https://www.python.org/
-[Flask]: https://img.shields.io/badge/Flask-000000?style=for-the-badge&logo=flask&logoColor=ffffff
-[Flask-url]: https://flask.palletsprojects.com/en/3.0.x/
 [Java]: https://img.shields.io/badge/Java-E02027?style=for-the-badge&logo=java&logoColor=ffffff
 [Java-url]: https://www.java.com/en/
 [Spring]: https://img.shields.io/badge/SrpingBoot-6DB33F?style=for-the-badge&logo=springboot&logoColor=ffffff
 [Spring-url]: https://spring.io/projects/spring-boot
 [PostgreSQL]: https://img.shields.io/badge/POSTGRESQL-4169E1?style=for-the-badge&logo=postgresql&logoColor=ffffff
 [PostgreSQL-url]: https://www.postgresql.org/
-[Mongo]: https://img.shields.io/badge/Mongodb-green?style=for-the-badge&logo=mongodb&logoColor=ffffff
-[Mongo-url]: https://www.mongodb.com/docs/
-[Javascript]: https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=javascript&logoColor=black
-[Javascript-url]: https://developer.mozilla.org/pt-BR/docs/Web/JavaScript
