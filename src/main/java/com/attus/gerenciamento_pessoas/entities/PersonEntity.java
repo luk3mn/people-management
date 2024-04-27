@@ -14,8 +14,14 @@ public class PersonEntity {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(name = "full_name", nullable = false)
-    private String fullName; // Nome Completo
+    // Nome Completo
+    @Column(name = "first_name", nullable = false)
+    private String firstName;
+    @Column(name = "middle_name", nullable = false)
+    private String middleName;
+    @Column(name = "last_name", nullable = false)
+    private String lastName;
+
     @Column(nullable = false)
     private String birthdate; // Data de nascimento
     @Column(nullable = false)

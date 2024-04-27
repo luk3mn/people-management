@@ -1,11 +1,11 @@
 package com.attus.gerenciamento_pessoas.controllers;
 
+import com.attus.gerenciamento_pessoas.dto.PersonDto;
 import com.attus.gerenciamento_pessoas.entities.PersonEntity;
 import com.attus.gerenciamento_pessoas.services.PersonService;
+import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,5 +19,10 @@ public class PersonController {
     @GetMapping
     public List<PersonEntity> findAll() {
         return personService.searchPerson();
+    }
+
+    @PostMapping
+    public PersonEntity createPerson(@RequestBody PersonDto personDto, HttpServletRequest request) {
+        return personService.createPerson(personDto, request);
     }
 }

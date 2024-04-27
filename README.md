@@ -123,7 +123,7 @@ _Before starting this application in your local environment, it'll be necessary 
 <!-- ROADMAP -->
 ## Roadmap
 
-- [ ] Create person
+- [x] Create person
 - [ ] Update person 
 - [x] Search all people
 - [ ] Search people by id
