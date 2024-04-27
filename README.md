@@ -129,7 +129,7 @@ _Before starting this application in your local environment, it'll be necessary 
 - [x] Create person
 - [ ] Update person 
 - [x] Search all people
-- [ ] Search people by id
+- [x] Search people by id
 - [ ] Create address
 - [ ] Update address
 - [ ] Search all address by id person

@@ -8,6 +8,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -32,6 +33,10 @@ public class PersonService {
         person.setBirthdate(personDto.birthdate());
 
         return personRepository.save(person);
+    }
+
+    public Optional<PersonEntity> searchPersonById(UUID id) {
+        return personRepository.findById(id);
     }
 
 }
