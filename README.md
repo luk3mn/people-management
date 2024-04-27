@@ -68,7 +68,8 @@
 
 <p align="justify">
  
-</p> 
+</p>
+
 
 <p align="right">(<a href="#people-management">back to top</a>)</p>
 
@@ -92,6 +93,9 @@ Here are some important topics about this project and how to replay it.
 * [Java >> 17](https://docs.oracle.com/en/java/javase/17/docs/api/index.html)
 * [Docker](https://docs.docker.com/)
 * [Docker Compose](https://docs.docker.com/compose/)
+   ```shell
+      sudo docker-compose up -d
+   ```
 
 ### Installation
 
@@ -112,13 +116,12 @@ _Before starting this application in your local environment, it'll be necessary 
 
 <!-- Deploy -->
 
-[//]: # (## Deploy)
+## Deploy
 
-[//]: # ()
-[//]: # (```shell)
-
-[//]: # (   )
-[//]: # (```)
+* [OpenAPI (Swagger)](https://springdoc.org/#getting-started)
+   ```text
+   http://localhost:8080/swagger-ui/index.html#/
+   ```
 
 <!-- ROADMAP -->
 ## Roadmap
@@ -163,8 +166,6 @@ If you have any feedback, please reach out to us at lucasnunes2030@gmail.com
 [//]: # (<!-- ACKNOWLEDGMENTS -->)
 
 [//]: # (## Acknowledgments)
-
-[//]: # (* []&#40;&#41;)
 
 
 <p align="right">(<a href="#people-management">back to top</a>)</p>
