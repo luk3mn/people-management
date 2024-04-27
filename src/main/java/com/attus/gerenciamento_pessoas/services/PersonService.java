@@ -39,4 +39,19 @@ public class PersonService {
         return personRepository.findById(id);
     }
 
+    public PersonEntity updatePerson(UUID id, PersonEntity personEntity) {
+        var person = personRepository.findById(id).orElse(null);
+
+        if (person == null) {
+            System.out.println("ERROR!!!");
+        }
+
+        person.setFirstName(personEntity.getFirstName());
+        person.setMiddleName(personEntity.getMiddleName());
+        person.setLastName(personEntity.getLastName());
+        person.setAddress(personEntity.getAddress());
+        person.setBirthdate(personEntity.getBirthdate());
+        return personRepository.save(person);
+    }
+
 }
