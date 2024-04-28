@@ -127,7 +127,7 @@ _Before starting this application in your local environment, it'll be necessary 
 ## Roadmap
 
 - [x] Create person
-- [ ] Update person 
+- [x] Update person 
 - [x] Search all people
 - [x] Search people by id
 - [ ] Create address

@@ -1,6 +1,7 @@
 package com.attus.gerenciamento_pessoas.controllers;
 
 import com.attus.gerenciamento_pessoas.dto.PersonDto;
+import com.attus.gerenciamento_pessoas.entities.AddressEntity;
 import com.attus.gerenciamento_pessoas.entities.PersonEntity;
 import com.attus.gerenciamento_pessoas.services.PersonService;
 import jakarta.servlet.http.HttpServletRequest;
@@ -21,14 +22,16 @@ public class PersonController {
 
     private final PersonService personService;
 
+    // TODO: Make a DTO to show just the main address
     @GetMapping
     public ResponseEntity<List<PersonEntity>> findAll() {
         var capturedAll = personService.searchPerson();
         return ResponseEntity.ok(capturedAll);
     }
 
+    // TODO: show only main address
     @GetMapping("/{id}")
-    public ResponseEntity<Optional<PersonEntity>> findById(@PathVariable UUID id) {
+    public ResponseEntity<PersonEntity> findById(@PathVariable UUID id) {
         var captured = personService.searchPersonById(id);
         return ResponseEntity.ok(captured);
     }
@@ -44,4 +47,14 @@ public class PersonController {
         var updated = personService.updatePerson(id, personEntity);
         return ResponseEntity.ok(updated);
     }
+
+    // TODO: GET  /{idPerson}/address -> Show all the address by person
+    @GetMapping("/{id}/address")
+    public ResponseEntity<List<PersonEntity>> findAllAddress(@PathVariable UUID id) {
+        var address = personService.searchAllAddressByPerson(id);
+        return ResponseEntity.ok(address);
+    }
+
+    // TODO: POST /{idPerson}/address -> Create a new address, choose main address and associate to the person
+    // TODO: PUT  /{idPerson}/address/idAddress -> Edit a specif address associated to specif person
 }
