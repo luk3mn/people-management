@@ -1,7 +1,7 @@
 package com.attus.gerenciamento_pessoas.services;
 
 import com.attus.gerenciamento_pessoas.dto.PersonDto;
-import com.attus.gerenciamento_pessoas.dto.PersonResponseDto;
+import com.attus.gerenciamento_pessoas.dto.PersonAddressResponseDto;
 import com.attus.gerenciamento_pessoas.entities.Address;
 import com.attus.gerenciamento_pessoas.entities.Person;
 import com.attus.gerenciamento_pessoas.exceptions.person.PersonNotFoundException;
@@ -23,7 +23,7 @@ public class PersonService {
         return personRepository.findAll();
     }
 
-    public PersonResponseDto createPerson(PersonDto personDto) {
+    public PersonAddressResponseDto createPerson(PersonDto personDto) {
         Person person = new Person();
         person.setFullName(personDto.fullName());
         person.setBirthdate(personDto.birthdate());
@@ -31,28 +31,30 @@ public class PersonService {
         person = personRepository.save(person);
 
         Address address = saveAddress(personDto, person);
-        return new PersonResponseDto(person.getId(), person.getFullName(), person.getBirthdate(), address);
+        return new PersonAddressResponseDto(person.getId(), person.getFullName(), person.getBirthdate(), address);
     }
 
     public Person searchPersonById(UUID id) {
         return personRepository.findById(id).orElseThrow(() -> new PersonNotFoundException("Person not found with id: " + id));
     }
 
-//    public PersonEntity updatePerson(UUID id, PersonEntity personEntity) {
-//
-//        var person = personRepository.findById(id).orElse(null);
-//
-//        if (person == null) {
-//            throw new PersonNotFoundException("Person not found with id: " + id);
-//        }
-//
-//        person.setFirstName(personEntity.getFirstName());
-//        person.setMiddleName(personEntity.getMiddleName());
-//        person.setLastName(personEntity.getLastName());
-//        person.setAddress(personEntity.getAddress());
-//        person.setBirthdate(personEntity.getBirthdate());
-//        return personRepository.save(person);
-//    }
+    public PersonAddressResponseDto updatePerson(UUID id, PersonDto personDto) {
+
+        Person person = personRepository.findById(id).orElse(null);
+
+        if (person == null) {
+            throw new PersonNotFoundException("Person not found with id: " + id);
+        }
+
+        person.setFullName(personDto.fullName());
+        person.setBirthdate(personDto.birthdate());
+        person.setAddress(person.getAddress());
+
+        personRepository.save(person);
+        Address address = saveAddress(personDto, person);
+
+        return new PersonAddressResponseDto(person.getId(), person.getFullName(), person.getBirthdate(), address);
+    }
 
     public List<Person> searchAllAddressByPerson(UUID id) {
         return personRepository.findAll();

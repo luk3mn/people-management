@@ -1,7 +1,7 @@
 package com.attus.gerenciamento_pessoas.controllers;
 
 import com.attus.gerenciamento_pessoas.dto.PersonDto;
-import com.attus.gerenciamento_pessoas.dto.PersonResponseDto;
+import com.attus.gerenciamento_pessoas.dto.PersonAddressResponseDto;
 import com.attus.gerenciamento_pessoas.entities.Person;
 import com.attus.gerenciamento_pessoas.services.PersonService;
 import jakarta.validation.Valid;
@@ -34,17 +34,18 @@ public class PersonController {
         return ResponseEntity.ok(captured);
     }
 
+    // TODO: consider how to include more than one address and place it as main
     @PostMapping
-    public ResponseEntity<PersonResponseDto> createPerson(@Valid @RequestBody PersonDto personDto) {
-        PersonResponseDto created = personService.createPerson(personDto);
+    public ResponseEntity<PersonAddressResponseDto> createPerson(@Valid @RequestBody PersonDto personDto) {
+        PersonAddressResponseDto created = personService.createPerson(personDto);
         return ResponseEntity.status(HttpStatus.CREATED).body(created);
     }
 
-//    @PutMapping("/{id}")
-//    public ResponseEntity<PersonEntity> update(@RequestBody PersonEntity personEntity, @PathVariable UUID id) {
-//        var updated = personService.updatePerson(id, personEntity);
-//        return ResponseEntity.ok(updated);
-//    }
+    @PutMapping("/{id}")
+    public ResponseEntity<PersonAddressResponseDto> update(@RequestBody PersonDto personDto, @PathVariable UUID id) {
+        var updated = personService.updatePerson(id, personDto);
+        return ResponseEntity.ok(updated);
+    }
 
     // TODO: GET  /{idPerson}/address -> Show all the address by person
     @GetMapping("/{id}/address")
@@ -54,5 +55,4 @@ public class PersonController {
     }
 
     // TODO: POST /{idPerson}/address -> Create a new address, choose main address and associate to the person
-    // TODO: PUT  /{idPerson}/address/idAddress -> Edit a specif address associated to specif person
 }
