@@ -1,29 +1,30 @@
 package com.attus.gerenciamento_pessoas.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
 import java.util.UUID;
 
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity(name = "people")
-public class PersonEntity {
+public class Person {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
     // Nome Completo
-    @Column(name = "first_name", nullable = false)
-    private String firstName;
-    @Column(name = "middle_name", nullable = false)
-    private String middleName;
-    @Column(name = "last_name", nullable = false)
-    private String lastName;
+    @Column(name = "full_name", nullable = false)
+    private String fullName; // Nome completo
 
     @Column(nullable = false)
     private String birthdate; // Data de nascimento
-    @Column(nullable = false)
-    private String address; // Endereço
+
+    @OneToMany(mappedBy = "person")
+    @JsonManagedReference
+    private List<Address> address; // Endereço
+
 }

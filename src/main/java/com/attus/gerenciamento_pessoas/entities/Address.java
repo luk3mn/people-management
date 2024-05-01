@@ -1,5 +1,6 @@
 package com.attus.gerenciamento_pessoas.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -11,7 +12,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity(name = "address")
-public class AddressEntity {
+public class Address {
     @Id
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
@@ -26,4 +27,10 @@ public class AddressEntity {
     private String city;
     @Column(nullable = false)
     private String state;
+
+    @ManyToOne
+    @JoinColumn(name = "person_id")
+    @JsonBackReference
+    private Person person;
+
 }

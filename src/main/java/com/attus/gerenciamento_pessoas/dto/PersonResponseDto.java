@@ -5,15 +5,10 @@ import com.attus.gerenciamento_pessoas.entities.Person;
 
 import java.util.UUID;
 
-public record PersonDto(
-//        UUID id,
+public record PersonResponseDto(
+        UUID id,
         String fullName,
         String birthdate,
-//        Address address
-        String zipCode,
-        Integer number,
-        String city,
-        String state,
-        String street
+        Address address
 ) {
 }
