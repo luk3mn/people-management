@@ -130,9 +130,9 @@ _Before starting this application in your local environment, it'll be necessary 
 - [x] Update person 
 - [x] Search all people
 - [x] Search people by id
-- [ ] Create address
-- [ ] Update address
-- [ ] Search all address by id person
+- [x] Create address
+- [x] Update address
+- [x] Search all address by id person
 - [ ] Search main address by id person
 - [ ] indicate the main person address
 

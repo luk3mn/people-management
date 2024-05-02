@@ -1,5 +1,6 @@
 package com.attus.gerenciamento_pessoas.services;
 
+import com.attus.gerenciamento_pessoas.dto.AddressDTO;
 import com.attus.gerenciamento_pessoas.dto.PersonDto;
 import com.attus.gerenciamento_pessoas.dto.PersonAddressResponseDto;
 import com.attus.gerenciamento_pessoas.entities.Address;
@@ -11,6 +12,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @Service
@@ -56,8 +58,8 @@ public class PersonService {
         return new PersonAddressResponseDto(person.getId(), person.getFullName(), person.getBirthdate(), address);
     }
 
-    public List<Person> searchAllAddressByPerson(UUID id) {
-        return personRepository.findAll();
+    public Person searchAllAddressByPerson(UUID id) {
+        return personRepository.findById(id).orElseThrow(() -> new PersonNotFoundException("Person not found with id: " + id));
     }
 
     private Address saveAddress(PersonDto personDto, Person person) {
@@ -73,4 +75,23 @@ public class PersonService {
         return this.addressRepository.save(address);
     }
 
+    public PersonAddressResponseDto createNewAddressForPerson(UUID personId, AddressDTO addressDTO) {
+
+        Optional<Person> person = personRepository.findById(personId);
+        if (person.isEmpty()) {
+            throw new RuntimeException("Person not found");
+        }
+
+        // Create a new Address entity
+        Address address = new Address();
+        address.setStreet(addressDTO.street());
+        address.setZipCode(addressDTO.zipCode());
+        address.setNumber(addressDTO.number());
+        address.setCity(addressDTO.city());
+        address.setState(addressDTO.state());
+        address.setPerson(person.get());
+
+        Address newAddress = addressRepository.save(address);
+        return new PersonAddressResponseDto(person.get().getId(), person.get().getFullName(), person.get().getBirthdate(), newAddress);
+    }
 }

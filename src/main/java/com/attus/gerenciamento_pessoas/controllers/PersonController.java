@@ -1,7 +1,9 @@
 package com.attus.gerenciamento_pessoas.controllers;
 
+import com.attus.gerenciamento_pessoas.dto.AddressDTO;
 import com.attus.gerenciamento_pessoas.dto.PersonDto;
 import com.attus.gerenciamento_pessoas.dto.PersonAddressResponseDto;
+import com.attus.gerenciamento_pessoas.entities.Address;
 import com.attus.gerenciamento_pessoas.entities.Person;
 import com.attus.gerenciamento_pessoas.services.PersonService;
 import jakarta.validation.Valid;
@@ -47,12 +49,15 @@ public class PersonController {
         return ResponseEntity.ok(updated);
     }
 
-    // TODO: GET  /{idPerson}/address -> Show all the address by person
     @GetMapping("/{id}/address")
-    public ResponseEntity<List<Person>> findAllAddress(@PathVariable UUID id) {
+    public ResponseEntity<Person> findAllAddress(@PathVariable UUID id) {
         var address = personService.searchAllAddressByPerson(id);
         return ResponseEntity.ok(address);
     }
 
-    // TODO: POST /{idPerson}/address -> Create a new address, choose main address and associate to the person
+    @PostMapping("/{personId}/address")
+    public ResponseEntity<PersonAddressResponseDto> newAddress(@PathVariable UUID personId, @RequestBody AddressDTO addressDTO) {
+        var newAddress = personService.createNewAddressForPerson(personId, addressDTO);
+        return ResponseEntity.status(HttpStatus.CREATED).body(newAddress);
+    }
 }
