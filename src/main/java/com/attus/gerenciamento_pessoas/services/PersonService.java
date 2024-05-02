@@ -33,13 +33,20 @@ public class PersonService {
         person = personRepository.save(person);
 
         Address address = saveAddress(personDto, person);
-        return new PersonAddressResponseDto(person.getId(), person.getFullName(), person.getBirthdate(), address);
+
+        if (person.getMainAddressId() == null) {
+            person.setMainAddressId(address.getId());
+            personRepository.save(person);
+        }
+
+        return new PersonAddressResponseDto(person.getId(), person.getFullName(), person.getBirthdate(), address, person.getMainAddressId());
     }
 
     public Person searchPersonById(UUID id) {
         return personRepository.findById(id).orElseThrow(() -> new PersonNotFoundException("Person not found with id: " + id));
     }
 
+    // TODO: improve update to change main address and be able to edit all the address
     public PersonAddressResponseDto updatePerson(UUID id, PersonDto personDto) {
 
         Person person = personRepository.findById(id).orElse(null);
@@ -55,24 +62,11 @@ public class PersonService {
         personRepository.save(person);
         Address address = saveAddress(personDto, person);
 
-        return new PersonAddressResponseDto(person.getId(), person.getFullName(), person.getBirthdate(), address);
+        return new PersonAddressResponseDto(person.getId(), person.getFullName(), person.getBirthdate(), address, person.getMainAddressId());
     }
 
     public Person searchAllAddressByPerson(UUID id) {
         return personRepository.findById(id).orElseThrow(() -> new PersonNotFoundException("Person not found with id: " + id));
-    }
-
-    private Address saveAddress(PersonDto personDto, Person person) {
-        var address = new Address();
-
-        address.setCity(personDto.city());
-        address.setStreet(personDto.street());
-        address.setZipCode(personDto.zipCode());
-        address.setState(personDto.state());
-        address.setNumber(personDto.number());
-        address.setPerson(person);
-
-        return this.addressRepository.save(address);
     }
 
     public PersonAddressResponseDto createNewAddressForPerson(UUID personId, AddressDTO addressDTO) {
@@ -92,6 +86,27 @@ public class PersonService {
         address.setPerson(person.get());
 
         Address newAddress = addressRepository.save(address);
-        return new PersonAddressResponseDto(person.get().getId(), person.get().getFullName(), person.get().getBirthdate(), newAddress);
+
+        // Update the main address ID in the Person entity if it's not set yet
+        if (person.get().getMainAddressId() == null) {
+            person.get().setMainAddressId(address.getId());
+            personRepository.save(person.get());
+        }
+
+        return new PersonAddressResponseDto(person.get().getId(), person.get().getFullName(), person.get().getBirthdate(), newAddress, person.get().getMainAddressId());
     }
+
+    private Address saveAddress(PersonDto personDto, Person person) {
+        var address = new Address();
+
+        address.setCity(personDto.city());
+        address.setStreet(personDto.street());
+        address.setZipCode(personDto.zipCode());
+        address.setState(personDto.state());
+        address.setNumber(personDto.number());
+        address.setPerson(person);
+
+        return this.addressRepository.save(address);
+    }
+
 }

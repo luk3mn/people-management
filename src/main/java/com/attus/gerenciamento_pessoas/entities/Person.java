@@ -27,4 +27,6 @@ public class Person {
     @JsonManagedReference
     private List<Address> address; // Endereço
 
+    @Column(name = "main_address_id")
+    private UUID mainAddressId; // ID of the main address
 }

@@ -8,6 +8,7 @@ public record PersonAddressResponseDto(
         UUID id,
         String fullName,
         String birthdate,
-        Address address
+        Address address,
+        UUID mainAddressId
 ) {
 }

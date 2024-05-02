@@ -3,7 +3,6 @@ package com.attus.gerenciamento_pessoas.controllers;
 import com.attus.gerenciamento_pessoas.dto.AddressDTO;
 import com.attus.gerenciamento_pessoas.dto.PersonDto;
 import com.attus.gerenciamento_pessoas.dto.PersonAddressResponseDto;
-import com.attus.gerenciamento_pessoas.entities.Address;
 import com.attus.gerenciamento_pessoas.entities.Person;
 import com.attus.gerenciamento_pessoas.services.PersonService;
 import jakarta.validation.Valid;
