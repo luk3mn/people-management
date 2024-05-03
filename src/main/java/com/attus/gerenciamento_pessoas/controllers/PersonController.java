@@ -3,6 +3,7 @@ package com.attus.gerenciamento_pessoas.controllers;
 import com.attus.gerenciamento_pessoas.dto.AddressDTO;
 import com.attus.gerenciamento_pessoas.dto.PersonDto;
 import com.attus.gerenciamento_pessoas.dto.PersonAddressResponseDto;
+import com.attus.gerenciamento_pessoas.dto.PersonRequestDTO;
 import com.attus.gerenciamento_pessoas.entities.Person;
 import com.attus.gerenciamento_pessoas.services.PersonService;
 import jakarta.validation.Valid;
@@ -35,7 +36,6 @@ public class PersonController {
         return ResponseEntity.ok(captured);
     }
 
-    // TODO: consider how to include more than one address and place it as main
     @PostMapping
     public ResponseEntity<PersonAddressResponseDto> createPerson(@Valid @RequestBody PersonDto personDto) {
         PersonAddressResponseDto created = personService.createPerson(personDto);
@@ -43,8 +43,8 @@ public class PersonController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<PersonAddressResponseDto> update(@RequestBody PersonDto personDto, @PathVariable UUID id) {
-        var updated = personService.updatePerson(id, personDto);
+    public ResponseEntity<PersonAddressResponseDto> update(@RequestBody PersonRequestDTO personRequestDTO, @PathVariable UUID id) {
+        var updated = personService.updatePerson(id, personRequestDTO);
         return ResponseEntity.ok(updated);
     }
 
@@ -58,5 +58,11 @@ public class PersonController {
     public ResponseEntity<PersonAddressResponseDto> newAddress(@PathVariable UUID personId, @RequestBody AddressDTO addressDTO) {
         var newAddress = personService.createNewAddressForPerson(personId, addressDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(newAddress);
+    }
+
+    @PutMapping("/address/{addressId}")
+    public ResponseEntity<PersonAddressResponseDto> updateAddress(@PathVariable UUID addressId, @RequestBody AddressDTO addressDTO) {
+        var updated = personService.updateAddress(addressId, addressDTO);
+        return ResponseEntity.ok(updated);
     }
 }

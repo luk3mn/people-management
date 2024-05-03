@@ -1,6 +1,7 @@
 package com.attus.gerenciamento_pessoas.services;
 
 import com.attus.gerenciamento_pessoas.dto.AddressDTO;
+import com.attus.gerenciamento_pessoas.dto.PersonRequestDTO;
 import com.attus.gerenciamento_pessoas.dto.PersonDto;
 import com.attus.gerenciamento_pessoas.dto.PersonAddressResponseDto;
 import com.attus.gerenciamento_pessoas.entities.Address;
@@ -46,23 +47,50 @@ public class PersonService {
         return personRepository.findById(id).orElseThrow(() -> new PersonNotFoundException("Person not found with id: " + id));
     }
 
-    // TODO: improve update to change main address and be able to edit all the address
-    public PersonAddressResponseDto updatePerson(UUID id, PersonDto personDto) {
+    public PersonAddressResponseDto updateAddress(UUID addressId, AddressDTO addressDTO) {
 
-        Person person = personRepository.findById(id).orElse(null);
+        Optional<Address> foundAddress = addressRepository.findById(addressId);
+        if (foundAddress.isEmpty()) {
+            throw new RuntimeException("Address not found with id: " + addressId);
+        }
 
-        if (person == null) {
+        Address address = foundAddress.get();
+        address.setZipCode(addressDTO.zipCode());
+        address.setNumber(addressDTO.number());
+        address.setState(addressDTO.state());
+        address.setCity(addressDTO.city());
+        address.setStreet(addressDTO.street());
+        addressRepository.save(address); // save information
+
+        Optional<Person> foundPerson = personRepository.findById(address.getPerson().getId());
+        if (foundPerson.isEmpty()) {
+            throw new PersonNotFoundException("Person not found with id: " + address.getPerson().getId());
+        }
+
+        Person person = foundPerson.get();
+        return new PersonAddressResponseDto(person.getId(), person.getFullName(), person.getBirthdate(), address, person.getMainAddressId());
+    }
+
+    public PersonAddressResponseDto updatePerson(UUID id, PersonRequestDTO personRequestDTO) {
+
+        Optional<Person> foundPerson = personRepository.findById(id);
+        if (foundPerson.isEmpty()) {
             throw new PersonNotFoundException("Person not found with id: " + id);
         }
 
-        person.setFullName(personDto.fullName());
-        person.setBirthdate(personDto.birthdate());
-        person.setAddress(person.getAddress());
+        Person person = foundPerson.get();
+        person.setFullName(personRequestDTO.fullName());
+        person.setBirthdate(personRequestDTO.birthdate());
+        person.setMainAddressId(personRequestDTO.mainAddressId());
+        personRepository.save(person); // save new person's information
 
-        personRepository.save(person);
-        Address address = saveAddress(personDto, person);
+        // Recovering address person information to return as response
+        Optional<Address> foundAddress = addressRepository.findById(personRequestDTO.mainAddressId());
+        if (foundAddress.isEmpty()) {
+            throw new RuntimeException("Address not found with id: " + personRequestDTO.mainAddressId());
+        }
 
-        return new PersonAddressResponseDto(person.getId(), person.getFullName(), person.getBirthdate(), address, person.getMainAddressId());
+        return new PersonAddressResponseDto(person.getId(), person.getFullName(), person.getBirthdate(), foundAddress.get(), person.getMainAddressId());
     }
 
     public Person searchAllAddressByPerson(UUID id) {

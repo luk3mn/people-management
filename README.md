@@ -133,8 +133,8 @@ _Before starting this application in your local environment, it'll be necessary 
 - [x] Create address
 - [x] Update address
 - [x] Search all address by id person
-- [ ] Search main address by id person
-- [ ] indicate the main person address
+- [x] Search main address by id person
+- [x] indicate the main person address
 
 
 <p align="right">(<a href="#people-management">back to top</a>)</p>
