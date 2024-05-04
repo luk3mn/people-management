@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.attus</groupId>
 	<artifactId>gerenciamento_pessoas</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>1.0.0</version>
 	<name>gerenciamento_pessoas</name>
 	<description>gerenciamento de pessoas</description>
 	<properties>
