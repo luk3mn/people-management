@@ -2,9 +2,9 @@ spring:
   application:
     name: gerenciamento_pessoas
   datasource:
-    url: jdbc:postgresql://localhost:5432/p_management
-    username: admin
-    password: admin
+    url: jdbc:postgresql://${HOST}:5432/${DATABASE}
+    username: ${USERNAME}
+    password: ${PASSWORD}
   jpa:
     properties:
       hibernate:
