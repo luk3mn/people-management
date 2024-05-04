@@ -22,16 +22,14 @@ public class PersonController {
 
     private final PersonService personService;
 
-    // TODO: Make a DTO to show just the main address
     @GetMapping
-    public ResponseEntity<List<Person>> findAll() {
+    public ResponseEntity<List<PersonAddressResponseDto>> findAll() {
         var capturedAll = personService.searchPerson();
         return ResponseEntity.ok(capturedAll);
     }
 
-    // TODO: show only main address
     @GetMapping("/{id}")
-    public ResponseEntity<Person> findById(@PathVariable UUID id) {
+    public ResponseEntity<PersonAddressResponseDto> findById(@PathVariable UUID id) {
         var captured = personService.searchPersonById(id);
         return ResponseEntity.ok(captured);
     }

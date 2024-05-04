@@ -12,6 +12,7 @@ import com.attus.gerenciamento_pessoas.repositories.PersonRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
@@ -22,8 +23,31 @@ public class PersonService {
     private final PersonRepository personRepository;
     private final AddressRepository addressRepository;
 
-    public List<Person> searchPerson() {
-        return personRepository.findAll();
+    public List<PersonAddressResponseDto> searchPerson() {
+        List<Person> people = personRepository.findAll();
+        List<PersonAddressResponseDto> responseDtos = new ArrayList<>();
+
+        for (Person person : people) {
+            // find the main address
+            Address mainAddress = person.getAddress().stream()
+                    .filter(address -> address.getId().equals(person.getMainAddressId()))
+                    .findFirst()
+                    .orElse(null);
+
+            // iterate the list of person and return as a DTO to put on a specif response list
+            PersonAddressResponseDto responseDto = new PersonAddressResponseDto(
+                    person.getId(),
+                    person.getFullName(),
+                    person.getBirthdate(),
+                    mainAddress,
+                    person.getMainAddressId()
+            );
+
+            // store each searched item into a response list DTO
+            responseDtos.add(responseDto);
+        }
+
+        return responseDtos;
     }
 
     public PersonAddressResponseDto createPerson(PersonDto personDto) {
@@ -43,8 +67,15 @@ public class PersonService {
         return new PersonAddressResponseDto(person.getId(), person.getFullName(), person.getBirthdate(), address, person.getMainAddressId());
     }
 
-    public Person searchPersonById(UUID id) {
-        return personRepository.findById(id).orElseThrow(() -> new PersonNotFoundException("Person not found with id: " + id));
+    public PersonAddressResponseDto searchPersonById(UUID id) {
+        Person person = personRepository.findById(id).orElseThrow(() -> new PersonNotFoundException("Person not found with id: " + id));
+
+        Optional<Address> foundAddress = addressRepository.findById(person.getMainAddressId());
+        if (foundAddress.isEmpty()) {
+            throw new RuntimeException("Address not found with id: " + person.getMainAddressId());
+        }
+
+        return new PersonAddressResponseDto(person.getId(), person.getFullName(), person.getBirthdate(), foundAddress.get(), person.getMainAddressId());
     }
 
     public PersonAddressResponseDto updateAddress(UUID addressId, AddressDTO addressDTO) {
