@@ -7,7 +7,6 @@ import java.util.UUID;
 public record PersonRequestDTO(
         String fullName,
         String birthdate,
-//        Address address,
         UUID mainAddressId
 ) {
 }

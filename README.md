@@ -65,6 +65,7 @@
 <!-- ABOUT THE PROJECT -->
 ## About The Project
 <!-- IMAGE (OPCIONAL) -->
+<img src="diagram.png"></img>
 
 <p align="justify">
  

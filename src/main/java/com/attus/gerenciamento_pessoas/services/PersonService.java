@@ -6,10 +6,12 @@ import com.attus.gerenciamento_pessoas.dto.PersonDto;
 import com.attus.gerenciamento_pessoas.dto.PersonAddressResponseDto;
 import com.attus.gerenciamento_pessoas.entities.Address;
 import com.attus.gerenciamento_pessoas.entities.Person;
+import com.attus.gerenciamento_pessoas.exceptions.address.AddressNotFoundException;
 import com.attus.gerenciamento_pessoas.exceptions.person.PersonNotFoundException;
 import com.attus.gerenciamento_pessoas.repositories.AddressRepository;
 import com.attus.gerenciamento_pessoas.repositories.PersonRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -68,11 +70,11 @@ public class PersonService {
     }
 
     public PersonAddressResponseDto searchPersonById(UUID id) {
-        Person person = personRepository.findById(id).orElseThrow(() -> new PersonNotFoundException("Person not found with id: " + id));
+        Person person = personRepository.findById(id).orElseThrow(() -> new PersonNotFoundException("Person not found with id: " + id, HttpStatus.NOT_FOUND));
 
         Optional<Address> foundAddress = addressRepository.findById(person.getMainAddressId());
         if (foundAddress.isEmpty()) {
-            throw new RuntimeException("Address not found with id: " + person.getMainAddressId());
+            throw new AddressNotFoundException("Address not found with id: " + person.getMainAddressId(), HttpStatus.NOT_FOUND);
         }
 
         return new PersonAddressResponseDto(person.getId(), person.getFullName(), person.getBirthdate(), foundAddress.get(), person.getMainAddressId());
@@ -82,7 +84,7 @@ public class PersonService {
 
         Optional<Address> foundAddress = addressRepository.findById(addressId);
         if (foundAddress.isEmpty()) {
-            throw new RuntimeException("Address not found with id: " + addressId);
+            throw new AddressNotFoundException("Address not found with id: " + addressId, HttpStatus.NOT_FOUND);
         }
 
         Address address = foundAddress.get();
@@ -95,7 +97,7 @@ public class PersonService {
 
         Optional<Person> foundPerson = personRepository.findById(address.getPerson().getId());
         if (foundPerson.isEmpty()) {
-            throw new PersonNotFoundException("Person not found with id: " + address.getPerson().getId());
+            throw new PersonNotFoundException("Person not found with id: " + address.getPerson().getId(), HttpStatus.NOT_FOUND);
         }
 
         Person person = foundPerson.get();
@@ -106,7 +108,7 @@ public class PersonService {
 
         Optional<Person> foundPerson = personRepository.findById(id);
         if (foundPerson.isEmpty()) {
-            throw new PersonNotFoundException("Person not found with id: " + id);
+            throw new PersonNotFoundException("Person not found with id: " + id, HttpStatus.NOT_FOUND);
         }
 
         Person person = foundPerson.get();
@@ -118,21 +120,21 @@ public class PersonService {
         // Recovering address person information to return as response
         Optional<Address> foundAddress = addressRepository.findById(personRequestDTO.mainAddressId());
         if (foundAddress.isEmpty()) {
-            throw new RuntimeException("Address not found with id: " + personRequestDTO.mainAddressId());
+            throw new AddressNotFoundException("Address not found with id: " + personRequestDTO.mainAddressId(), HttpStatus.NOT_FOUND);
         }
 
         return new PersonAddressResponseDto(person.getId(), person.getFullName(), person.getBirthdate(), foundAddress.get(), person.getMainAddressId());
     }
 
     public Person searchAllAddressByPerson(UUID id) {
-        return personRepository.findById(id).orElseThrow(() -> new PersonNotFoundException("Person not found with id: " + id));
+        return personRepository.findById(id).orElseThrow(() -> new PersonNotFoundException("Person not found with id: " + id, HttpStatus.NOT_FOUND));
     }
 
     public PersonAddressResponseDto createNewAddressForPerson(UUID personId, AddressDTO addressDTO) {
 
         Optional<Person> person = personRepository.findById(personId);
         if (person.isEmpty()) {
-            throw new RuntimeException("Person not found");
+            throw new PersonNotFoundException("Person not found with id: " + personId, HttpStatus.NOT_FOUND);
         }
 
         // Create a new Address entity

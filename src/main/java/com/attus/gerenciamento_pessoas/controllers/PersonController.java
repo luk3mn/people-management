@@ -6,6 +6,7 @@ import com.attus.gerenciamento_pessoas.dto.PersonAddressResponseDto;
 import com.attus.gerenciamento_pessoas.dto.PersonRequestDTO;
 import com.attus.gerenciamento_pessoas.entities.Person;
 import com.attus.gerenciamento_pessoas.services.PersonService;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -18,6 +19,7 @@ import java.util.UUID;
 @RestController
 @RequestMapping("/person")
 @RequiredArgsConstructor
+@Tag(name = "Pessoa", description = "Construção das APIs de Pessoa com relacionamento com Endereço")
 public class PersonController {
 
     private final PersonService personService;

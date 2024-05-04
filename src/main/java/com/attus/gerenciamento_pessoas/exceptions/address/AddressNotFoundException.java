@@ -1,12 +1,12 @@
-package com.attus.gerenciamento_pessoas.exceptions.person;
+package com.attus.gerenciamento_pessoas.exceptions.address;
 
 import org.springframework.http.HttpStatus;
 
-public class PersonNotFoundException extends RuntimeException {
+public class AddressNotFoundException extends RuntimeException {
 
     private final HttpStatus status;
 
-    public PersonNotFoundException(String message, HttpStatus status) {
+    public AddressNotFoundException(String message, HttpStatus status) {
         super(message);
         this.status = status;
     }
